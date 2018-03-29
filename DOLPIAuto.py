@@ -32,8 +32,6 @@ import RPi.GPIO as GPIO
 import numpy as np
 from Adafruit_MCP4725 import MCP4725 #controls MCP4725 DAC
 #from Adafruit_ADS1x15.ADS1x15 import ADS1x15 #controls ADS1015 ADC
-
-
 import Adafruit_ADS1x15
 
 #IO PINS
@@ -127,7 +125,7 @@ def cal():
     plt.plot(vol,light) #Plot VCPA transmission as function of voltage plt.xlabel('D/A voltage code')
     plt.ylabel('Light transmission A/D counts')
     plt.title('Light transmission through VCPA')
-    plt.savefig("VCPA.png")
+    plt.savefig("./Images/VCPA.png")
     plt.show() #Show the plot
 
     light_index_max=light.index(max(light)) #Find index of maximum transmission
@@ -225,13 +223,13 @@ while loop:
     if k != -1: # wait for x key to exit
         loop = False
          # Prepare to Leave
-        cv2.imwrite("image0.jpg", image0)
-        cv2.imwrite("image90.jpg", image90)
-        cv2.imwrite("image45.jpg", image45)
-        cv2.imwrite("RGBpol.jpg", cv2.merge([B, G, R]))
-        cv2.imwrite("image0g.jpg", R)
-        cv2.imwrite("image90g.jpg", G)
-        cv2.imwrite("image45g.jpg", B)
+        cv2.imwrite("./Images/image0.jpg", image0)
+        cv2.imwrite("./Images/image90.jpg", image90)
+        cv2.imwrite("./Images/image45.jpg", image45)
+        cv2.imwrite("./Images/RGBpol.jpg", cv2.merge([B, G, R]))
+        cv2.imwrite("./Images/image0g.jpg", R)
+        cv2.imwrite("./Images/image90g.jpg", G)
+        cv2.imwrite("./Images/image45g.jpg", B)
         dac.set_voltage(0) # Turn frontLCD OFF
         cv2.destroyAllWindows()
 quit
