@@ -132,7 +132,7 @@ def cal():
     maxVCPAvolt=vol[light_index_max]
     print ("max DAC code", maxVCPAvolt)
     return maxVCPAvolt
-voltVCPA45=0
+voltVCPA45=cal()
 voltVCPA90=0
 voltVCPA0=3000
 
