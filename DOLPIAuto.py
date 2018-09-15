@@ -132,7 +132,7 @@ def cal():
     maxVCPAvolt=vol[light_index_max]
     print ("max DAC code", maxVCPAvolt)
     return maxVCPAvolt
-voltVCPA45=cal()
+voltVCPA45=0
 voltVCPA90=0
 voltVCPA0=3000
 
@@ -166,6 +166,8 @@ video = True
 loop=True #Initial state of loop flag
 first=True #Flag to skip display during first loop
 
+codec = cv2.VideoWriter_fourcc(*"H264")
+videowriter = cv2.VideoWriter("./Images/output.mp4", 0x00000021 , 20, camera.resolution)
 while loop:
     #grab an image from the camera at 0 degrees
     dac.set_voltage(0)
@@ -219,6 +221,7 @@ while loop:
     # Display DOLP image
     GPIO.output(dc0degpin,False)
     GPIO.output(dc45degpin,False)
+    videowriter.write(imageDOLPi)
     k = cv2.waitKey(1) # Check keyboard for input
     if k != -1: # wait for x key to exit
         loop = False
@@ -230,6 +233,7 @@ while loop:
         cv2.imwrite("./Images/image0g.jpg", R)
         cv2.imwrite("./Images/image90g.jpg", G)
         cv2.imwrite("./Images/image45g.jpg", B)
+        videowriter.release()
         dac.set_voltage(0) # Turn frontLCD OFF
         cv2.destroyAllWindows()
 quit
